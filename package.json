@@ -1,0 +1,19 @@
+{
+  "name": "eleicoes-transparentes-api",
+  "version": "0.1.0",
+  "description": "REST API for exposes data from brazilian elections.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "brazilian",
+    "elections",
+    "api"
+  ],
+  "author": "Nilton Vasques",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.13.0"
+  }
+}
