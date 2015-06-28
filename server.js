@@ -1,13 +1,34 @@
-var express = require('express');
+var express     = require('express'),
+    candidatos  = require('./routes/candidatos.js'),
+    partidos    = require('./routes/partidos.js'),
+    comites     = require('./routes/comites.js'),
+    eleicoes    = require('./routes/eleicoes.js'),
+    transacoes  = require('./routes/transacoes.js'),
+    database    = require('./database.js');
+
  
 var app = express();
+
+//app.configure(function(){
+//  app.use(express.logger('dev'));
+//  app.use(express.bodyParser());
+//});
+
+database.connect(function(err) {
+  
+});
  
-app.get('/wines', function(req, res) {
-    res.send([{name:'wine1'}, {name:'wine2'}]);
-});
-app.get('/wines/:id', function(req, res) {
-    res.send({id:req.params.id, name: "The Name", description: "description"});
-});
+app.get('/candidatos',      candidatos.findAll);
+app.get('/candidatos/:id',  candidatos.findById);
+app.get('/partidos',        partidos.findAll);
+app.get('/partidos/:id',    partidos.findById);
+app.get('/comites',         comites.findAll);
+app.get('/comites/:id',     comites.findById);
+app.get('/eleicoes',        eleicoes.findAll);
+app.get('/eleicoes/:id',    eleicoes.findById);
+app.get('/transacoes',      transacoes.findAll);
+app.get('/transacoes/:id',  transacoes.findById);
  
 app.listen(3000);
 console.log('Listening on port 3000...');
+
