@@ -1,10 +1,12 @@
 var mysql      = require('mysql');
+var options = require('./options');
+
 
 exports.connect = function (callback){
   connection = mysql.createConnection({
-    host     : 'niltonvasques.com.br',
-    user     : 'etuser',
-    password : 'LVum3NNfqIvkw',
+    host     : options.storageConfig.HOST,
+    user     : options.storageConfig.user,
+    password : options.storageConfig.password,
     database : 'eleicao'
   });
 
