@@ -2,7 +2,7 @@ var mysql      = require('mysql');
 
 exports.connect = function (callback){
   connection = mysql.createConnection({
-    host     : 'localhost',
+    host     : 'niltonvasques.com.br',
     user     : 'etuser',
     password : 'LVum3NNfqIvkw',
     database : 'eleicao'
