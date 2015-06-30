@@ -1,11 +1,11 @@
-# REST API do Projeto [Eleições Transparentes](https://github.com/niltonvasques/eleicoes-transparentes)
+## REST API do Projeto [Eleições Transparentes](https://github.com/niltonvasques/eleicoes-transparentes)
 
   - [Instalação](#instalação)
   - [Tabela REST](#tabela-rest)
 
 API REST para expor os dados do projeto Eleições Transparentes.
 
-## Instalação
+### Instalação
 
 Instalar o nodejs e o npm:
 
@@ -21,7 +21,7 @@ Iniciar a aplicação:
 
     npm start
 
-## Tabela REST 
+### Tabela REST 
 
  METHOD | URL | DESC
 --------|-----|---------------------------
