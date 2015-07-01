@@ -25,7 +25,6 @@ exports.connect = function (callback){
     if (err) {
       // Oops! Unexpected closing of connection, lets reconnect back.
       console.log('Connection was closed unexpectedly.');
-      connection = mysql.createConnection(connection.config);
       exports.connect(callback);
     } else {
       console.log('Connection closed normally.');
