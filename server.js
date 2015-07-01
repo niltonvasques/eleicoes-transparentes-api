@@ -18,12 +18,12 @@ database.connect(function(err) {
   
 });
  
-app.get('/candidatos',                          candidatos.findAll);
-app.get('/candidatos/:id',                      candidatos.findById);
-app.get('/candidatos/:id/receitas',             candidatos.receitas);
-app.get('/candidatos/:id/receitas/total',       candidatos.receitasTotal);
-app.get('/candidatos/:id/despesas',             candidatos.despesas);
-app.get('/candidatos/:id/despesas/total',       candidatos.despesasTotal);
+app.get('/eleicoes/:id/candidatos',                         candidatos.findAll);
+app.get('/eleicoes/:id/candidatos/:cand_id',                candidatos.findById);
+app.get('/eleicoes/:id/candidatos/:cand_id/receitas',            candidatos.receitas);
+app.get('/eleicoes/:id/candidatos/:cand_id/receitas/total',      candidatos.receitasTotal);
+app.get('/eleicoes/:id/candidatos/:cand_id/despesas',            candidatos.despesas);
+app.get('/eleicoes/:id/candidatos/:cand_id/despesas/total',      candidatos.despesasTotal);
 app.get('/partidos',                            partidos.findAll);
 app.get('/partidos/:id',                        partidos.findById);
 app.get('/comites',                             comites.findAll);
