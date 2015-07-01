@@ -3,7 +3,8 @@ var database    = require('../database.js')
 
 exports.findAll = function(req, res){
   eleicao_id = req.params.id;
-  database.connection.query("SELECT * FROM Candidato WHERE eleicao_id = ? ORDER BY nome", 
+  database.connection.query( 
+      "SELECT id, nome, escolaridade, sexo, municipio, uf, cargo, numero, nacionalidade, tituloEleitoral, ocupacao, estadoCivil, situacaoCandidatura FROM Candidato WHERE eleicao_id = ? ORDER BY nome",
       [eleicao_id], function(err, rows, fields){
     if(err) throw err;
     res.send(rows);
@@ -13,7 +14,8 @@ exports.findAll = function(req, res){
 exports.findById = function(req, res){
   eleicao_id = req.params.id;
   candidato_id = req.params.cand_id;
-  database.connection.query("SELECT * FROM Candidato WHERE id = ? AND eleicao_id = ? ORDER BY nome", 
+  database.connection.query( 
+      "SELECT id, nome, escolaridade, sexo, municipio, uf, cargo, numero, nacionalidade, tituloEleitoral, ocupacao, estadoCivil, situacaoCandidatura FROM Candidato WHERE id = ? AND eleicao_id = ? ORDER BY nome",
       [candidato_id, eleicao_id], 
       function(err, rows, fields){
         if(err) throw err;
