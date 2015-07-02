@@ -33,7 +33,11 @@ exports.findAll = function(req, res){
   var params = [eleicao_id];
   if(req.query.uf){
     query = query + " AND uf = ? ";
-    params = [eleicao_id, req.query.uf];
+    params.push(req.query.uf);
+  }
+  if(req.query.search){
+    query = query + " AND nome LIKE ? ";
+    params.push('%'+req.query.search+'%');
   }
   query = query + " ORDER BY nome";
   paginated_query(req, res, query, params);
