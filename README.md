@@ -19,6 +19,16 @@ Clonar o repositório e instalar os módulos:
     cd eleicoes-transparentes-api
     npm install
 
+Criar arquivo config.json na raiz do repositório, para as configurações do database MySQL, com o seguinte padrão:
+
+```json
+{
+    "HOST"     : "xxx.xxx.xxx.xxx",
+    "user"     : "user",
+    "password" : "secret_pass"
+}
+```
+
 Iniciar a aplicação:
 
     npm start
