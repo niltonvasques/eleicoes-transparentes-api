@@ -25,19 +25,21 @@ exports.paginate = function paginate(query, options, callback) {
     //query.sort(sortBy);
   }
   console.log(query);
-  database.connection.query( "SELECT count(*) as total FROM ("+origQuery+") AS derivedTable", 
-      options.params, 
-      function(err, rows, fields){
+  database.connection.query( query, options.params, function(err, rows, fields){
     if(err){
       return callback(err);
     } 
-    var total = rows[0].total;
-    var hasMore = Math.max(total - skipFrom, 0);
-    database.connection.query( query, options.params, function(err, rows, fields){
+    //REGEX to count total results from query
+    query = query.replace(new RegExp("SELECT(\\s(.+,)*\\s\\w+\\s|\\s\\w+\\s)FROM"), 
+        "SELECT count(*) as total FROM");
+    console.log(query);
+    database.connection.query( query, options.params, function(err, rows2, fields){
       if(err){
         return callback(err);
       } 
+      var total = rows2[0].total;
       var items = rows.length;
+      var hasMore = Math.max(total-(skipFrom+items), 0);
       var json = { 
         page: pageNumber, 
         hasMore: hasMore,

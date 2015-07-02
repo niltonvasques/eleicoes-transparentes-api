@@ -26,7 +26,7 @@ function paginated_query(req, res, query, params){
   );
 }
 
-//eleicoes/:id/candidatos?page=2&limit=10&uf=BA
+//eleicoes/:id/candidatos?page=2&limit=10&uf=BA&search=NOME&cidade=ALAGOINHAS
 exports.findAll = function(req, res){
   var eleicao_id = req.params.id;
   var query = "SELECT id, nome, escolaridade, sexo, municipio, uf, cargo, numero, nacionalidade, tituloEleitoral, ocupacao, estadoCivil, situacaoCandidatura FROM Candidato WHERE eleicao_id = ? ";
@@ -38,6 +38,10 @@ exports.findAll = function(req, res){
   if(req.query.search){
     query = query + " AND nome LIKE ? ";
     params.push('%'+req.query.search+'%');
+  }
+  if(req.query.cidade){
+    query = query + " AND municipio LIKE ? ";
+    params.push('%'+req.query.cidade+'%');
   }
   query = query + " ORDER BY nome";
   paginated_query(req, res, query, params);
