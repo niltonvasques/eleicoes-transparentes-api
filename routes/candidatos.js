@@ -1,5 +1,5 @@
 var database    = require('../database.js');
-var paginate    = require('../paginate.js');
+var paginate    = require('node-mysql-paginate');
 
 function paginated_query(req, res, query, params){
   var limit = 10;
@@ -10,7 +10,7 @@ function paginated_query(req, res, query, params){
   if(req.query.page){
     page = req.query.page;
   }
-  paginate.paginate(query, 
+  paginate.paginate(database.connection, query, 
       {
         page : page,
         limit: limit,
