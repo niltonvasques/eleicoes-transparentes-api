@@ -19,6 +19,7 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.0",
-    "node-mysql-paginate": "niltonvasques/node-mysql-paginate"
+    "node-mysql-paginate": "niltonvasques/node-mysql-paginate",
+    "oauth2-server": "^2.4.1"
   }
 }
