@@ -1,5 +1,6 @@
 // options.js
+var path = require('path');
 var fs = require('fs'),
-configPath = './config.json';
+configPath = path.join(__dirname, "./", 'config.json');
 var parsed = JSON.parse(fs.readFileSync(configPath, 'UTF-8'));
 exports.storageConfig=  parsed;

@@ -47,35 +47,39 @@ passport.use(new BearerStrategy({
 //  }
 //);
 
-app.get('/eleicao/:id/candidatos', 
+app.get('/', function (req, res){
+	res.send('Eleições Transparentes API v0.1');
+});
+
+app.get('/api/eleicao/:id/candidatos', 
     passport.authenticate('bearer', { session: false }), candidatos.findAll);
-app.get('/eleicao/:id/candidato/:cand_id', 
+app.get('/api/eleicao/:id/candidato/:cand_id', 
     passport.authenticate('bearer', { session: false }), candidatos.findById);
-app.get('/eleicao/:id/candidato/:cand_id/receitas', 
+app.get('/api/eleicao/:id/candidato/:cand_id/receitas', 
     passport.authenticate('bearer', { session: false }), candidatos.receitas);
-app.get('/eleicao/:id/candidato/:cand_id/receitas/total', 
+app.get('/api/eleicao/:id/candidato/:cand_id/receitas/total', 
     passport.authenticate('bearer', { session: false }), candidatos.receitasTotal);
-app.get('/eleicao/:id/candidato/:cand_id/despesas', 
+app.get('/api/eleicao/:id/candidato/:cand_id/despesas', 
     passport.authenticate('bearer', { session: false }), candidatos.despesas);
-app.get('/eleicao/:id/candidato/:cand_id/despesas/total', 
+app.get('/api/eleicao/:id/candidato/:cand_id/despesas/total', 
     passport.authenticate('bearer', { session: false }), candidatos.despesasTotal);
-app.get('/partidos', 
+app.get('/api/partidos', 
     passport.authenticate('bearer', { session: false }), partidos.findAll);
-app.get('/partido/:id', 
+app.get('/api/partido/:id', 
     passport.authenticate('bearer', { session: false }), partidos.findById);
-app.get('/eleicao/:id/partidos/receitas/total', 
+app.get('/api/eleicao/:id/partidos/receitas/total', 
     passport.authenticate('bearer', { session: false }), partidos.allReceitasTotal);
-app.get('/eleicao/:id/partido/:p_id/receitas', 
+app.get('/api/eleicao/:id/partido/:p_id/receitas', 
     passport.authenticate('bearer', { session: false }), partidos.receitas);
-app.get('/eleicao/:id/partido/:p_id/receitas/total', 
+app.get('/api/eleicao/:id/partido/:p_id/receitas/total', 
     passport.authenticate('bearer', { session: false }), partidos.receitasTotal);
-app.get('/comites', 
+app.get('/api/comites', 
     passport.authenticate('bearer', { session: false }), comites.findAll);
-app.get('/comite/:id', 
+app.get('/api/comite/:id', 
     passport.authenticate('bearer', { session: false }), comites.findById);
-app.get('/eleicoes', 
+app.get('/api/eleicoes', 
     passport.authenticate('bearer', { session: false }), eleicoes.findAll);
-app.get('/eleicao/:id', 
+app.get('/api/eleicao/:id', 
     passport.authenticate('bearer', { session: false }), eleicoes.findById);
 
 app.listen(3000);
