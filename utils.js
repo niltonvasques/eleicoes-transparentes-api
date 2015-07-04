@@ -1,3 +1,5 @@
+var paginate    = require('node-mysql-paginate');
+var database    = require('./database.js');
 /**
  * Return a unique identifier with the given `len`.
  *
@@ -31,4 +33,29 @@ exports.uid = function(len) {
 
 function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+exports.paginatedQuery = function (req, res, query, params){
+  var limit = 10;
+  if(req.query.limit){
+    limit = req.query.limit;
+  }
+  var page = 1;
+  if(req.query.page){
+    page = req.query.page;
+  }
+  paginate.paginate(database.connection, query, 
+      {
+        page : page,
+        limit: limit,
+        params: params 
+      },
+      function (err, rows){
+        if(err){
+          console.log("An unexpected error happens.");
+          return;
+        }
+        res.json(rows);
+      }
+  );
 }

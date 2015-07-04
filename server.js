@@ -30,7 +30,7 @@ passport.use(new BearerStrategy({
     // the user to `false` to indicate failure. Otherwise, return the
     // authenticated `user`. Note that in a production-ready application, one
     // would want to validate the token for authenticity.
-    db.user.findByToken(token, function(err, user) {
+    db.users.findByToken(token, function(err, user) {
       if (err) { return done(err); }
       if (!user) { return done(null, false); }
       return done(null, user);
@@ -47,29 +47,35 @@ passport.use(new BearerStrategy({
 //  }
 //);
 
-app.get('/eleicoes/:id/candidatos', 
+app.get('/eleicao/:id/candidatos', 
     passport.authenticate('bearer', { session: false }), candidatos.findAll);
-app.get('/eleicoes/:id/candidatos/:cand_id', 
+app.get('/eleicao/:id/candidato/:cand_id', 
     passport.authenticate('bearer', { session: false }), candidatos.findById);
-app.get('/eleicoes/:id/candidatos/:cand_id/receitas', 
+app.get('/eleicao/:id/candidato/:cand_id/receitas', 
     passport.authenticate('bearer', { session: false }), candidatos.receitas);
-app.get('/eleicoes/:id/candidatos/:cand_id/receitas/total', 
+app.get('/eleicao/:id/candidato/:cand_id/receitas/total', 
     passport.authenticate('bearer', { session: false }), candidatos.receitasTotal);
-app.get('/eleicoes/:id/candidatos/:cand_id/despesas', 
+app.get('/eleicao/:id/candidato/:cand_id/despesas', 
     passport.authenticate('bearer', { session: false }), candidatos.despesas);
-app.get('/eleicoes/:id/candidatos/:cand_id/despesas/total', 
+app.get('/eleicao/:id/candidato/:cand_id/despesas/total', 
     passport.authenticate('bearer', { session: false }), candidatos.despesasTotal);
 app.get('/partidos', 
     passport.authenticate('bearer', { session: false }), partidos.findAll);
-app.get('/partidos/:id', 
+app.get('/partido/:id', 
     passport.authenticate('bearer', { session: false }), partidos.findById);
+app.get('/eleicao/:id/partidos/receitas/total', 
+    passport.authenticate('bearer', { session: false }), partidos.allReceitasTotal);
+app.get('/eleicao/:id/partido/:p_id/receitas', 
+    passport.authenticate('bearer', { session: false }), partidos.receitas);
+app.get('/eleicao/:id/partido/:p_id/receitas/total', 
+    passport.authenticate('bearer', { session: false }), partidos.receitasTotal);
 app.get('/comites', 
     passport.authenticate('bearer', { session: false }), comites.findAll);
-app.get('/comites/:id', 
+app.get('/comite/:id', 
     passport.authenticate('bearer', { session: false }), comites.findById);
 app.get('/eleicoes', 
     passport.authenticate('bearer', { session: false }), eleicoes.findAll);
-app.get('/eleicoes/:id', 
+app.get('/eleicao/:id', 
     passport.authenticate('bearer', { session: false }), eleicoes.findById);
 
 app.listen(3000);
