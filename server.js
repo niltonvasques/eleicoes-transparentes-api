@@ -87,6 +87,10 @@ app.get('/api/eleicoes',
     passport.authenticate('bearer', { session: false }), eleicoes.findAll);
 app.get('/api/eleicao/:id', 
     passport.authenticate('bearer', { session: false }), eleicoes.findById);
+app.get('/api/eleicao/:id/despesas/total', 
+    passport.authenticate('bearer', { session: false }), eleicoes.despesasTotal);
+app.get('/api/eleicao/:id/receitas/total', 
+    passport.authenticate('bearer', { session: false }), eleicoes.receitasTotal);
 app.get('/api/eleicao/:id/ranking_doadores_pj', 
     passport.authenticate('bearer', { session: false }), eleicoes.rankingDoadoresPJ);
 
