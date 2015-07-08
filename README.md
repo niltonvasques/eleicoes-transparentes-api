@@ -39,8 +39,8 @@ Iniciar a aplicação:
 |----------|--------|-----|---------------------------
 |<ul><li>- [x] </li></ul> | GET | /eleicoes | Retorna a lista de eleições disponíveis.
 <ul><li>- [x] </li></ul> | GET | /eleicao/:id | Retorna informações da eleição através com id = :id.
-<ul><li>- [ ] </li></ul> | GET | /eleicao/:id/despesas/total | Total de despesas em uma eleição com id = :id.
-<ul><li>- [ ] </li></ul> | GET | /eleicao/:id/receitas/total | Total de receitas em uma eleição com id = :id.
+<ul><li>- [x] </li></ul> | GET | /eleicao/:id/despesas/total | Total de despesas em uma eleição com id = :id.
+<ul><li>- [x] </li></ul> | GET | /eleicao/:id/receitas/total | Total de receitas em uma eleição com id = :id.
 <ul><li>- [x] </li></ul> | GET | /eleicao/:id/candidato | Retorna a lista de candidatos de uma eleição.
 <ul><li>- [x] </li></ul> | GET | /eleicao/:id/candidato/:id | Retorna informações do candidato com id = :id.
 <ul><li>- [x] </li></ul> | GET | /eleicao/:id/candidato/:id/receitas | Retorna a lista de receitas que um candidato recebeu na eleição.
