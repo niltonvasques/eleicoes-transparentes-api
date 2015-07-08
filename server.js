@@ -69,10 +69,16 @@ app.get('/api/partido/:id',
     passport.authenticate('bearer', { session: false }), partidos.findById);
 app.get('/api/eleicao/:id/partidos/receitas/total', 
     passport.authenticate('bearer', { session: false }), partidos.allReceitasTotal);
+app.get('/api/eleicao/:id/partidos/despesas/total', 
+    passport.authenticate('bearer', { session: false }), partidos.allDespesasTotal);
 app.get('/api/eleicao/:id/partido/:p_id/receitas', 
     passport.authenticate('bearer', { session: false }), partidos.receitas);
 app.get('/api/eleicao/:id/partido/:p_id/receitas/total', 
     passport.authenticate('bearer', { session: false }), partidos.receitasTotal);
+app.get('/api/eleicao/:id/partido/:p_id/despesas', 
+    passport.authenticate('bearer', { session: false }), partidos.despesas);
+app.get('/api/eleicao/:id/partido/:p_id/despesas/total', 
+    passport.authenticate('bearer', { session: false }), partidos.despesasTotal);
 app.get('/api/comites', 
     passport.authenticate('bearer', { session: false }), comites.findAll);
 app.get('/api/comite/:id', 
@@ -81,6 +87,8 @@ app.get('/api/eleicoes',
     passport.authenticate('bearer', { session: false }), eleicoes.findAll);
 app.get('/api/eleicao/:id', 
     passport.authenticate('bearer', { session: false }), eleicoes.findById);
+app.get('/api/eleicao/:id/ranking_doadores_pj', 
+    passport.authenticate('bearer', { session: false }), eleicoes.rankingDoadoresPJ);
 
 app.listen(3000);
 console.log('Listening on port 3000...');
