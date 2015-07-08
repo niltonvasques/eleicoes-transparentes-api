@@ -19,6 +19,9 @@
   "license": "MIT",
   "dependencies": {
     "express": "^4.13.0",
-    "node-mysql-paginate": "niltonvasques/node-mysql-paginate"
+    "mysql": "^2.7.0",
+    "node-mysql-paginate": "niltonvasques/node-mysql-paginate",
+    "passport": "^0.2.2",
+    "passport-http-bearer": "^1.0.1"
   }
 }

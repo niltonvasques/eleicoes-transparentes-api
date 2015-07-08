@@ -1,30 +1,7 @@
 var database    = require('../database.js');
+var utils       = require('../utils.js');
 var paginate    = require('node-mysql-paginate');
 
-function paginated_query(req, res, query, params){
-  var limit = 10;
-  if(req.query.limit){
-    limit = req.query.limit;
-  }
-  var page = 1;
-  if(req.query.page){
-    page = req.query.page;
-  }
-  paginate.paginate(database.connection, query, 
-      {
-        page : page,
-        limit: limit,
-        params: params 
-      },
-      function (err, rows){
-        if(err){
-          console.log("An unexpected error happens.");
-          return;
-        }
-        res.json(rows);
-      }
-  );
-}
 
 //eleicoes/:id/candidatos?page=2&limit=10&uf=BA&search=NOME&cidade=ALAGOINHAS
 exports.findAll = function(req, res){
@@ -44,14 +21,14 @@ exports.findAll = function(req, res){
     params.push('%'+req.query.cidade+'%');
   }
   query = query + " ORDER BY nome";
-  paginated_query(req, res, query, params);
+  utils.paginatedQuery(req, res, query, params);
 }
 
 exports.findById = function(req, res){
   var eleicao_id = req.params.id;
   var candidato_id = req.params.cand_id;
   var query = "SELECT id, nome, escolaridade, sexo, municipio, uf, cargo, numero, nacionalidade, tituloEleitoral, ocupacao, estadoCivil, situacaoCandidatura FROM Candidato WHERE id = ? AND eleicao_id = ? ORDER BY nome";
-  paginated_query(req, res, query, [candidato_id, eleicao_id]);
+  utils.paginatedQuery(req, res, query, [candidato_id, eleicao_id]);
 }
 
 exports.receitas = function(req, res){
@@ -59,7 +36,7 @@ exports.receitas = function(req, res){
   var candidato_id = req.params.cand_id;
   var query = "SELECT * FROM Transacao WHERE creditado_id = "+
         "(SELECT agenteEleitoral_id FROM Candidato WHERE id = ? AND eleicao_id = ?)";
-  paginated_query(req, res, query, [candidato_id, eleicao_id]);
+  utils.paginatedQuery(req, res, query, [candidato_id, eleicao_id]);
 }
 
 exports.receitasTotal = function(req, res){
@@ -81,7 +58,7 @@ exports.despesas = function(req, res){
   var query = 
       "SELECT * FROM Transacao WHERE debitado_id = "+
         "(SELECT agenteEleitoral_id FROM Candidato WHERE id = ? AND eleicao_id = ?)";
-  paginated_query(req, res, query, [candidato_id, eleicao_id]);
+  utils.paginatedQuery(req, res, query, [candidato_id, eleicao_id]);
 }
 
 exports.despesasTotal = function(req, res){

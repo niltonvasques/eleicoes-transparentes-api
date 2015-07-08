@@ -16,6 +16,7 @@ exports.connect = function (callback){
     callback(err);
     if(err){
       console.error('error connecting: ' + err.stack);
+      setTimeout(exports.connect(callback), 2000);
       return;
     }
     console.log('connected as id ' + connection.threadId);
@@ -25,10 +26,18 @@ exports.connect = function (callback){
     if (err) {
       // Oops! Unexpected closing of connection, lets reconnect back.
       console.log('Connection was closed unexpectedly.');
-      exports.connect(callback);
+      setTimeout(exports.connect(callback), 2000);
     } else {
       console.log('Connection closed normally.');
     }
+  });
+  connection.on('error', function(err) {
+	console.log('db error', err);
+	if(err.code === 'PROTOCOL_CONNECTION_LOST') { // Connection to the MySQL server is usually
+	  exports.connect(callback);
+	} else {                                      // connnection idle timeout (the wait_timeout
+	  throw err;                                  // server variable configures this)
+	}
   });
 };
 

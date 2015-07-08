@@ -17,3 +17,11 @@ exports.findById = function(req, res){
       });
 }
 
+exports.rankingDoadoresPJ = function(req, res){
+    database.connection.query("SELECT * FROM RankingDoadoresPJ LIMIT 100", 
+        function(err, rows, fields){
+        if(err) throw err;
+        res.send(rows);
+    });
+}
+
